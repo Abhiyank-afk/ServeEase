@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+        }
+
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .options {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .options a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 14px;
+        }
+
+        .options a:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        function showCreateAccount() {
+            document.querySelector('.login-container').classList.add('hidden');
+            document.querySelector('.create-account-container').classList.remove('hidden');
+        }
+
+        function showLogin() {
+            document.querySelector('.create-account-container').classList.add('hidden');
+            document.querySelector('.forgot-password-container').classList.add('hidden');
+            document.querySelector('.login-container').classList.remove('hidden');
+        }
+
+        function showForgotPassword() {
+            document.querySelector('.login-container').classList.add('hidden');
+            document.querySelector('.forgot-password-container').classList.remove('hidden');
+        }
+
+        function sendResetCode() {
+            const email = document.getElementById('forgot-email').value;
+            if (email) {
+                alert(`A reset code has been sent to ${email}`);
+                // Simulate email sending here (replace with actual backend integration)
+            } else {
+                alert('Please enter your email address.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container login-container">
+        <h2>Login</h2>
+        <form onsubmit="event.preventDefault(); window.location.href = 'index.html';">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div class="options">
+            <p><a href="#" onclick="showCreateAccount()">Create New Account</a></p>
+            <p><a href="#" onclick="showForgotPassword()">Forget Password?</a></p>
+        </div>
+    </div>
+
+    <div class="container create-account-container hidden">
+        <h2>Create Account</h2>
+        <form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="number">Phone Number</label>
+                <input type="tel" id="number" name="number" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email-create" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password-create" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role" name="role" required>
+                    <option value="">Select Role</option>
+                    <option value="customer">Customer</option>
+                    <option value="worker">Worker</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">Create Account</button>
+        </form>
+        <div class="options">
+            <p><a href="#" onclick="showLogin()">Back to Login</a></p>
+        </div>
+    </div>
+
+    <div class="container forgot-password-container hidden">
+        <h2>Forgot Password</h2>
+        <form onsubmit="event.preventDefault(); sendResetCode();">
+            <div class="form-group">
+                <label for="forgot-email">Email</label>
+                <input type="email" id="forgot-email" name="email" placeholder="Enter your email" required>
+            </div>
+            <button type="submit" class="btn">Send Reset Code</button>
+        </form>
+        <div class="options">
+            <p><a href="#" onclick="showLogin()">Back to Login</a></p>
+        </div>
+    </div>
+</body>
+</html>
